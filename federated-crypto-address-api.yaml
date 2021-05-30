@@ -1,0 +1,78 @@
+swagger: '2.0'
+info:
+  title: Federated Crypto Payment Address API
+  version: "1.0"
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/addresses/{identifier}/{currency}/:
+    parameters:
+      - name: identifier
+        in: path
+        description: the unique identifier or username being looked up, For example "john@example.com"
+        required: true
+        type: string
+        format: email
+      - name: currency
+        in: path
+        description: The symbol/ticker for a crypto currency. For example "BTC" or "ETH"
+        required: true
+        type: string
+    get:
+      summary: Get the crypto wallet address for a uniquely-identified user and crypto pair.
+      operationId: GetAddressByUniqueIdentifier
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UserCryptoAddressResponse'
+        '404':
+          description: Crypto address for user not found
+          schema:
+            $ref: '#/definitions/CryptoAddressNotFoundResponse'
+        default:
+          description: An unexpected error response
+          schema:
+            $ref: '#/definitions/runtimeError'
+      tags:
+        - Address
+        
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+definitions:
+  UserCryptoAddressResponse:
+    type: object
+    properties:
+      address:
+        type: string
+        description: A crypto wallet address
+        example: 1jM9o3y7KL6DK2fvEwkCJmaNVvar85B3R
+  CryptoAddressNotFoundResponse:
+    type: object
+    properties:
+      status:
+        type: string
+        example: error
+        title: Note that there was an error
+      error:
+        type: string
+        title: What caused the error
+        example: User not found
+  runtimeError:
+    type: object
+    properties:
+      status:
+        type: string
+        example: error
+        title: Note that there was an error
+      error:
+        type: string
+        title: What caused the error
+        example: Could not connect to database
+
+
