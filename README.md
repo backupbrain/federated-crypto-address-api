@@ -40,3 +40,40 @@ Becky uses Coinbase as a crypto exchange, and has ETH in one of her wallets. Sin
 Yahoo responds with an ETH address, which is Becky's Coinbase stores as the destination address for Becky's payment.
 
 In this way, Becky can pay Allison by paying ETH to "pay-allison@yahoo.com" without ever having to type in an ETH address or scan a QR code. Allison doesn't even have to remember the address when she tells Becky to pay her.
+
+## How it Works
+
+The protocol follows this sequence:
+
+1) **Client** makes a HTTP request to **Server**:
+```
+GET /api/1.0/addresses/<email-style-address>/<crypto-ticker>/
+```
+2) **Server** looks up a `crypto-address` matching `email-style-address` and `crypto-ticker`in its records.
+
+If a record is found, the server responds with the `crypto-address`:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;encoding=utf-8
+
+{
+	"address": "<crypto-address>"
+}
+```
+If a record is not found, the server responds with a **Not Found** error:
+
+```
+HTTP/1.1 404 Not Found
+Content-Type: application/json;encoding=utf-8
+
+{
+	"status": "error",
+	"error": "User / crypto pairing not found"
+}
+```
+
+The sequence diagram for this is as follows:
+![Sequence Diagram showing Client request for user and crypto, then server response with crypto address or error if no record found](https://mermaid.ink/svg/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQ2xpZW50LT4-U2VydmVyOiBHRVQgL2FwaS8xLjAvYWRkcmVzc2VzL2VtYWlsQGV4YW1wbGUuY29tL0JUQy9cbiAgICBhbHQgUmVjb3JkIGV4aXN0c1xuICAgIFNlcnZlci0-PkNsaWVudDogSFRUUC8xLjEgMjAwIHtcImFkZHJlc3NcIjogXCJhYmMxMjMnfVxuICAgIGVsc2UgUmVjb3JkIG5vdCBmb3VuZFxuICAgIFNlcnZlci0-PkNsaWVudDogSFRUUC8xLjEgNDA0IHtcInN0YXR1c1wiOlwiZXJyb3JcIn1cbiAgICBlbmRcbiAgICAgICAgICAgICIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9 "Sequence Diagram")
+
+
