@@ -43,7 +43,7 @@ In this way, Becky can pay Allison by paying ETH to "pay-allison@yahoo.com" with
 
 ## How it Works
 
-**Note: This API must be run on port 8325**
+**Note: This API must be run on port `8325`**
 
 The protocol follows this sequence:
 
