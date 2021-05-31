@@ -78,4 +78,14 @@ Content-Type: application/json;encoding=utf-8
 The sequence diagram for this is as follows:
 ![Sequence Diagram showing Client request for user and crypto, then server response with crypto address or error if no record found](https://mermaid.ink/svg/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQ2xpZW50LT4-U2VydmVyOiBHRVQgL2FwaS8xLjAvYWRkcmVzc2VzL2VtYWlsQGV4YW1wbGUuY29tL0JUQy9cbiAgICBhbHQgUmVjb3JkIGV4aXN0c1xuICAgIFNlcnZlci0-PkNsaWVudDogSFRUUC8xLjEgMjAwIHtcImFkZHJlc3NcIjogXCJhYmMxMjMnfVxuICAgIGVsc2UgUmVjb3JkIG5vdCBmb3VuZFxuICAgIFNlcnZlci0-PkNsaWVudDogSFRUUC8xLjEgNDA0IHtcInN0YXR1c1wiOlwiZXJyb3JcIn1cbiAgICBlbmRcbiAgICAgICAgICAgICIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9 "Sequence Diagram")
 
+## Implementations
 
+There are several implementations of this API in different languages
+
+**Python**
+* Django
+  * [Django Federated Crypto Address API](https://github.com/backupbrain/django-federated-crypto-address-api/)
+
+**Node**
+* ExpressJs
+  * [Expresso Federated Crypto Address API](https://github.com/backupbrain/expressjs-federated-crypto-address-api)
